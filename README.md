@@ -14,7 +14,7 @@ A simple, fun, and classic Snake game written in HTML, CSS, and JavaScript that 
 * Use the arrow keys (`↑`, `↓`, `←`, `→`) to move the snake.
 * Every time the snake eats food (a red square), it grows, and your score increases.
 * The game ends if the snake runs into the walls or itself.
-* You can click [here](https://github.com/FarshidRA/Snake-Game) and test the game.
+* You can click [here](https://farshidra.github.io/Snake-Game/) and test the game.
 ## Game Controls:
 
 * **START Play**: Starts a new game.
