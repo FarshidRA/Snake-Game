@@ -5,7 +5,7 @@ A simple, fun, and classic Snake game written in HTML, CSS, and JavaScript that 
 
 ## Features:
 
-* **Play**: Start a new game with the "▶️" button.
+* **Play**: Start a new game with the "START" button.
 * **Score**: Keep track of your score as you eat food and grow your snake.
 * **Responsive**: Fully functional on desktop browsers.
 
@@ -17,7 +17,7 @@ A simple, fun, and classic Snake game written in HTML, CSS, and JavaScript that 
 
 ## Game Controls:
 
-* **▶️ Play**: Starts a new game.
+* **START Play**: Starts a new game.
 
 ## Installation:
 
