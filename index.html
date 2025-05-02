@@ -4,35 +4,74 @@
   <meta charset="UTF-8">
   <title>🐍 Snake Game</title>
   <style>
+  @import url('https://fonts.cdnfonts.com/css/led-dot-matrix');
+  @import url('https://fonts.cdnfonts.com/css/serpens');
     body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background-color: #f0f0f0;
-    }
+	  font-family: Arial, sans-serif;
+	  text-align: center;
+	  background-color: #000;
+	  display: flex;
+	  justify-content: center; 
+	  align-items: center;     
+	  height: 100vh;           
+	  flex-direction: column;  
+	  padding: 0px;
+	  margin: 0px;
+	}
+
+	#mytitle {
+	  font-family: 'Serpens', sans-serif;
+	  font-size: 100px;
+	  padding: 0px;
+	  margin: 0px;
+	  color: #6CBB3C;
+	  display: flex;
+	  justify-content: center; / 
+	  align-items: center;
+	  gap: 20px; / 
+	}
+
+
+	#score {
+	  font-family: 'LED Dot-Matrix', sans-serif;
+
+	  font-size: 30px;
+	  color: red;
+	  margin-left: 20px;
+	  min-width: 200px; / 
+	  text-align: left; / 
+	}
+
+
     canvas {
       background-color: #000;
       display: block;
-      margin: 20px auto;
+      margin: 0px auto;
+	  border-radius: 8px;
+  box-shadow: 0 0 30px 5px rgba(108, 187, 60, 0.8);
     }
+	 
+
     #controls button {
-      padding: 10px 20px;
-      margin: 5px;
-      font-size: 16px;
+      padding: 0px;
+      margin: 0px;
+      font-size: 30px;
       cursor: pointer;
+	  border: none;
+	  background: none;
+	  outline: none;
     }
-    #score {
-      font-size: 20px;
-      margin-top: 10px;
-    }
+     
   </style>
 </head>
 <body>
 
-<h1>Snake Game</h1>
-<div id="score">Score: 0</div>
-<canvas id="gameCanvas" width="600" height="400"></canvas>
+	<div id="mytitle"><span>SNAKE</span>
+		<div id="score">Score: 0</div>
+	</div>
+<canvas id="gameCanvas" width="400" height="400"></canvas>
 <div id="controls">
-  <button onclick="startGame()">Play</button>
+  <button onclick="startGame()">▶️</button>
  
 </div>
 
@@ -40,7 +79,7 @@
   const canvas = document.getElementById('gameCanvas');
   const ctx = canvas.getContext('2d');
 
-  const box = 20;
+  const box = 10;
   const canvasSize = 400;
   let snake = [{ x: 160, y: 200 }];
   let direction = 'RIGHT';
@@ -72,10 +111,12 @@
 
     // Game over conditions
     if (
-      head.x < 0 || head.y < 0 ||
-      head.x >= canvasSize || head.y >= canvasSize ||
-      snake.some(segment => segment.x === head.x && segment.y === head.y)
-    ) {
+  head.x < 0 || head.y < 0 ||
+  head.x > canvasSize - box || head.y > canvasSize - box ||
+  snake.some(segment => segment.x === head.x && segment.y === head.y)
+)
+
+	{
       clearInterval(gameInterval);
       alert('Game Over! Your score: ' + score);
       return;
@@ -94,11 +135,14 @@
   }
 
   function placeFood() {
-    food = {
-      x: Math.floor(Math.random() * (canvasSize / box)) * box,
-      y: Math.floor(Math.random() * (canvasSize / box)) * box
-    };
-  }
+  const maxIndex = canvasSize / box - 2;
+  const minIndex = 1;
+  food = {
+    x: Math.floor(Math.random() * (maxIndex - minIndex + 1) + minIndex) * box,
+    y: Math.floor(Math.random() * (maxIndex - minIndex + 1) + minIndex) * box
+  };
+}
+
 
   function startGame() {
     resetGame();
