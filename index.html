@@ -1,179 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>🐍 Snake Game</title>
-  <style>
-  @import url('https://fonts.cdnfonts.com/css/led-dot-matrix');
-  @import url('https://fonts.cdnfonts.com/css/serpens');
-    body {
-	  font-family: Arial, sans-serif;
-	  text-align: center;
-	  background-color: #000;
-	  display: flex;
-	  justify-content: center; 
-	  align-items: center;     
-	  height: 100vh;           
-	  flex-direction: column;  
-	  padding: 0px;
-	  margin: 0px;
-	}
-
-	#mytitle {
-	  font-family: 'Serpens', sans-serif;
-	  font-size: 100px;
-	  padding: 0px;
-	  margin: 0px;
-	  color: #6CBB3C;
-	  display: flex;
-	  justify-content: center; 
-	  align-items: center;
-	  gap: 20px;  
-	}
-
-
-	#score {
-	  font-family: 'LED Dot-Matrix', sans-serif;
-
-	  font-size: 30px;
-	  color: red;
-	  margin-left: 20px;
-	  min-width: 200px;  
-	  text-align: left;  
-	}
-
-
-    canvas {
-      background-color: #000;
-      display: block;
-      margin: 0px auto;
-	  border-radius: 8px;
-  box-shadow: 0 0 30px 5px rgba(108, 187, 60, 0.8);
-    }
-	 
-
-    #controls button {
-      padding: 0px;
-      margin: 0px;
-      font-size: 30px;
-      cursor: pointer;
-	  border: none;
-	  background: none;
-	  outline: none;
-    }
-     
-  </style>
+	  <meta charset="UTF-8">
+	  <title>🐍 Snake Game</title>
+	  <link rel="stylesheet" href="assets/css/style.css">
+	  <script src="assets/js/script.js" defer></script>
 </head>
 <body>
-
 	<div id="mytitle"><span>SNAKE</span>
 		<div id="score">Score: 0</div>
 	</div>
-<canvas id="gameCanvas" width="400" height="400"></canvas>
-<div id="controls">
-  <button onclick="startGame()">▶️</button>
- 
-</div>
-
-<script>
-  const canvas = document.getElementById('gameCanvas');
-  const ctx = canvas.getContext('2d');
-
-  const box = 10;
-  const canvasSize = 400;
-  let snake = [{ x: 160, y: 200 }];
-  let direction = 'RIGHT';
-  let food = {};
-  let score = 0;
-  let gameInterval;
-  let isPaused = false;
-
-  function drawBox(x, y, color) {
-    ctx.fillStyle = color;
-    ctx.fillRect(x, y, box, box);
-  }
-
-  function draw() {
-    if (isPaused) return;
-    ctx.clearRect(0, 0, canvasSize, canvasSize);
-
-    for (let part of snake) {
-      drawBox(part.x, part.y, 'lime');
-    }
-
-    drawBox(food.x, food.y, 'red');
-
-    let head = { ...snake[0] };
-    if (direction === 'LEFT') head.x -= box;
-    if (direction === 'RIGHT') head.x += box;
-    if (direction === 'UP') head.y -= box;
-    if (direction === 'DOWN') head.y += box;
-
-    // Game over conditions
-    if (
-  head.x < 0 || head.y < 0 ||
-  head.x > canvasSize - box || head.y > canvasSize - box ||
-  snake.some(segment => segment.x === head.x && segment.y === head.y)
-)
-
-	{
-      clearInterval(gameInterval);
-      alert('Game Over! Your score: ' + score);
-      return;
-    }
-
-    snake.unshift(head);
-
-    // Eat food
-    if (head.x === food.x && head.y === food.y) {
-      score++;
-      document.getElementById('score').innerText = 'Score: ' + score;
-      placeFood();
-    } else {
-      snake.pop();
-    }
-  }
-
-  function placeFood() {
-  const maxIndex = canvasSize / box - 2;
-  const minIndex = 1;
-  food = {
-    x: Math.floor(Math.random() * (maxIndex - minIndex + 1) + minIndex) * box,
-    y: Math.floor(Math.random() * (maxIndex - minIndex + 1) + minIndex) * box
-  };
-}
-
-
-  function startGame() {
-    resetGame();
-    gameInterval = setInterval(draw, 100);
-  }
-
-  function resetGame() {
-    clearInterval(gameInterval);
-    snake = [{ x: 160, y: 200 }];
-    direction = 'RIGHT';
-    score = 0;
-    isPaused = false;
-    document.getElementById('score').innerText = 'Score: ' + score;
-    placeFood();
-  }
-
-  function resumeGame() {
-    if (!gameInterval) {
-      gameInterval = setInterval(draw, 100);
-      isPaused = false;
-    }
-  }
-
-  document.addEventListener('keydown', event => {
-    const key = event.key;
-    if (key === 'ArrowLeft' && direction !== 'RIGHT') direction = 'LEFT';
-    if (key === 'ArrowRight' && direction !== 'LEFT') direction = 'RIGHT';
-    if (key === 'ArrowUp' && direction !== 'DOWN') direction = 'UP';
-    if (key === 'ArrowDown' && direction !== 'UP') direction = 'DOWN';
-  });
-</script>
-
+	<canvas id="gameCanvas" width="400" height="400"></canvas>
+	<div id="controls">
+  		<div id="lastScore" style="font-family: 'LED Dot-Matrix', sans-serif; color: red; font-size: 40px; margin-bottom: 10px;"></div>
+  		<button onclick="startGame()">START</button>
+	</div>
 </body>
 </html>
