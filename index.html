@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Snake Game</title>
+  <style>
+    body {
+      margin: 0;
+      background: #111;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    canvas {
+      background: #222;
+      box-shadow: 0 0 10px #0f0;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="game" width="400" height="400"></canvas>
+
+  <script>
+    const canvas = document.getElementById("game");
+    const ctx = canvas.getContext("2d");
+
+    const box = 20;
+    const rows = canvas.height / box;
+    const cols = canvas.width / box;
+
+    let snake = [{ x: 10 * box, y: 10 * box }];
+    let direction = "RIGHT";
+
+    let food = {
+      x: Math.floor(Math.random() * cols) * box,
+      y: Math.floor(Math.random() * rows) * box
+    };
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowUp" && direction !== "DOWN") direction = "UP";
+      if (e.key === "ArrowDown" && direction !== "UP") direction = "DOWN";
+      if (e.key === "ArrowLeft" && direction !== "RIGHT") direction = "LEFT";
+      if (e.key === "ArrowRight" && direction !== "LEFT") direction = "RIGHT";
+    });
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw snake
+      ctx.fillStyle = "lime";
+      snake.forEach((s) => ctx.fillRect(s.x, s.y, box, box));
+
+      // Draw food
+      ctx.fillStyle = "red";
+      ctx.fillRect(food.x, food.y, box, box);
+
+      // Move snake
+      let head = { ...snake[0] };
+      if (direction === "UP") head.y -= box;
+      if (direction === "DOWN") head.y += box;
+      if (direction === "LEFT") head.x -= box;
+      if (direction === "RIGHT") head.x += box;
+
+      // Game over: wall collision
+      if (
+        head.x < 0 || head.x >= canvas.width ||
+        head.y < 0 || head.y >= canvas.height
+      ) {
+        clearInterval(game);
+        alert("Game Over");
+        return;
+      }
+
+      // Game over: self collision
+      for (let i = 1; i < snake.length; i++) {
+        if (head.x === snake[i].x && head.y === snake[i].y) {
+          clearInterval(game);
+          alert("Game Over");
+          return;
+        }
+      }
+
+      snake.unshift(head);
+
+      // Eat food
+      if (head.x === food.x && head.y === food.y) {
+        food = {
+          x: Math.floor(Math.random() * cols) * box,
+          y: Math.floor(Math.random() * rows) * box
+        };
+      } else {
+        snake.pop();
+      }
+    }
+
+    const game = setInterval(draw, 100);
+  </script>
+</body>
+</html>
