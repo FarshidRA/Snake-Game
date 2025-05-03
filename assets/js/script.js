@@ -92,7 +92,7 @@ function drawEyes(x, y) {
       break;
   }
 
-  // چشم‌ها (سفید)
+  // eye w
   ctx.fillStyle = 'white';
   ctx.beginPath();
   ctx.arc(x + offset1.x, y + offset1.y, eyeRadius, 0, Math.PI * 2);
@@ -102,7 +102,7 @@ function drawEyes(x, y) {
   ctx.arc(x + offset2.x, y + offset2.y, eyeRadius, 0, Math.PI * 2);
   ctx.fill();
 
-  // مردمک‌ها (سیاه)
+  // eye b
   ctx.fillStyle = 'black';
   ctx.beginPath();
   ctx.arc(x + offset1.x, y + offset1.y, eyeRadius / 2, 0, Math.PI * 2);
