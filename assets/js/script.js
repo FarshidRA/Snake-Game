@@ -55,6 +55,7 @@ const canvas = document.getElementById('gameCanvas');
   document.getElementById('controls').style.display = 'block';
   return;
 }
+alert('Game Over! Your score: ' + score + '\nHigh Score: ' + highScore);
 
 
     snake.unshift(head);
