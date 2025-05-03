@@ -1,3 +1,5 @@
+let highScore = localStorage.getItem('snakeHighScore') || 0;
+document.getElementById('highscore').innerText = 'High Score: ' + highScore;
 const canvas = document.getElementById('gameCanvas');
   const ctx = canvas.getContext('2d');
 
