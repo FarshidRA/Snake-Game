@@ -7,20 +7,17 @@
 	  <script src="assets/js/script.js" defer></script>
 </head>
 <body>
-	<div id="mytitle"><span>SNAKE</span>
-		<div id="score">Score: 0</div>
-	</div>
-	<canvas id="gameCanvas" width="400" height="400"></canvas>
-	<div id="scoreboard">
-  <div id="score">Score: 0</div>
-  <div id="highscore">High Score: 0</div>
+	<div id="mytitle">SNAKE</div>
+	<div id="score">
+  <span id="currentScore">Score: 0</span>
+  <span id="highScore">High Score: 0</span>
 </div>
+
+	<canvas id="gameCanvas" width="400" height="400"></canvas>
 	<div id="controls">
-  		<div id="lastScore" style="font-family: 'LED Dot-Matrix', sans-serif; color: red; font-size: 40px; margin-bottom: 10px;"></div>
-  		<button onclick="startGame()">START</button>
+		<div id="lastScore" style="font-family: 'LED Dot-Matrix', sans-serif; color: red; font-size: 40px; margin-bottom: 10px;"></div>
+		<button onclick="startGame()">START</button>
 	</div>
-	
-	
 
 </body>
 </html>
