@@ -16,24 +16,19 @@
 	#mytitle {
 	  font-family: 'Serpens', sans-serif;
 	  font-size: 100px;
-	  padding: 0px;
-	  margin: 0px;
 	  color: #6CBB3C;
-	  display: flex;
-	  justify-content: center; 
-	  align-items: center;
-	  gap: 20px;  
 	}
 
 
 	#score {
 	  font-family: 'LED Dot-Matrix', sans-serif;
-
-	  font-size: 30px;
+	  display: flex;
+	  font-size: 20px;
 	  color: red;
-	  margin-left: 20px;
-	  min-width: 200px;  
-	  text-align: left;  
+	  display: flex;
+	  justify-content: center; 
+	  align-items: center;
+	  gap: 80px;  	  
 	}
 
 
@@ -42,14 +37,14 @@
       display: block;
       margin: 0px auto;
 	  border-radius: 8px;
-  box-shadow: 0 0 30px 5px rgba(108, 187, 60, 0.8);
+	  box-shadow: 0 0 30px 5px rgba(108, 187, 60, 0.8);
     }
 	 
-#controls {
-  position: absolute;
-  top: 55%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+	#controls {
+	  position: absolute;
+	  top: 55%;
+	  left: 50%;
+	  transform: translate(-50%, -50%);
 }
 
     #controls button {
